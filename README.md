@@ -33,19 +33,21 @@ Both releases are distributed under **Creative Commons Attribution-NoDerivatives
 
 Each release contains a set of reflectance-calibrated hyperspectral cubes (band-interleaved-by-line, uint16, 256 × 384 pixels × 462 bands, 386.88–1003.60 nm, reflectance scale factor 10,000), with AFB1 ground truth labelled per concentration level. Two v1 cubes whose files could not be read are excluded, leaving **57 v1 cubes (training) and 52 v3 cubes (cross-batch test); n = 109 cubes total**.
 
-Place the downloaded archives in `data/` after extraction:
+Each archive unzips to a `Dataset/` folder containing one subfolder per contamination level, with `.bil` cubes inside. A suggested layout is:
 
 ```
 data/
-├── v1/                              # 57 cubes from doi:10.5281/zenodo.16920712
-│   ├── Level_01/ ... Level_22/      # one folder per contamination level
-│   └── levels_v1.csv                # level → AFB1 µg/kg ground truth
-└── v3/                              # 52 cubes from doi:10.5281/zenodo.20027441
-    ├── Level_01/ ... Level_26/      # one folder per contamination level
-    └── levels_v3.csv                # level → AFB1 µg/kg ground truth
+├── v1/                              # unzipped doi:10.5281/zenodo.16920712
+│   └── Dataset/
+│       ├── Level_01/ ... Level_22/  # .bil cubes per level (22 levels × 3 imaging replicates)
+└── v3/                              # unzipped doi:10.5281/zenodo.20027441
+    └── Dataset/
+        ├── Level_01/ ... Level_26/  # .bil cubes per level (26 levels × 2 imaging replicates)
 ```
 
-SHA256 checksums of the archives used in the manuscript are recorded in `logs/download_provenance.tsv`.
+AFB1 ground-truth concentrations are not in the archives — they are hard-coded as a dictionary (`AFB1_PPB`) in `scripts/pistachio_io.py`, keyed by level number. The 8 µg/kg EU regulatory threshold is the constant `EU_AFB1_THRESHOLD_PPB` in the same file.
+
+The PISTACHIO_V1_DATA and PISTACHIO_V3_DATA environment variables (see [Environment variables](#3-environment-variables) below) should point at the two `Dataset/` folders, wherever you put them on disk.
 
 ---
 
