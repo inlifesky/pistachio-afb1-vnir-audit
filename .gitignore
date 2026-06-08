@@ -1,0 +1,30 @@
+# Source data: NOT redistributed under the CC BY-ND 4.0 no-derivatives term of
+# the HyperPistachio dataset (Zenodo doi:10.5281/zenodo.16920712 and
+# doi:10.5281/zenodo.20027441). Users download the raw cubes directly from
+# Zenodo and place them under data/. Track only the empty-folder placeholder.
+data/*
+!data/.gitkeep
+
+# Computed outputs: regenerate by re-running scripts.
+results/*
+!results/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*~

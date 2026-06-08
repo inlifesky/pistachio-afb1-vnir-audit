@@ -1,0 +1,15 @@
+# Conda environment for the pistachio AFB1 VNIR cross-batch audit pipeline.
+# Mirrors requirements.txt. Tested on Python 3.11; works on 3.11+.
+# To reproduce: conda env create -f environment.yml && conda activate pistachio-afb1-audit
+name: pistachio-afb1-audit
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy>=2.0,<3.0
+  - pandas>=2.0,<3.0
+  - scipy>=1.13,<2.0
+  - scikit-learn>=1.5,<2.0
+  - matplotlib>=3.9,<4.0
+  - pip

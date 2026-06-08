@@ -1,0 +1,12 @@
+# Pinned dependencies for the pistachio AFB1 VNIR cross-batch audit pipeline.
+# Tested on Python 3.11; should work on Python 3.11+.
+# To reproduce exactly:
+#   python -m venv venv
+#   source venv/bin/activate          # Windows: venv\Scripts\activate
+#   pip install -r requirements.txt
+
+numpy>=2.0,<3.0
+pandas>=2.0,<3.0
+scipy>=1.13,<2.0
+scikit-learn>=1.5,<2.0
+matplotlib>=3.9,<4.0

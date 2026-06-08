@@ -1,0 +1,36 @@
+metric	scope	level	value	source	notes
+# v1 baseline (inherited from v1 verification log)
+RidgeSG2_xb_lot_AUC8	cross-batch	lot_mean	0.698	results/36 + recomputed 32_pred_v3_Ridge.npy	matches 36
+RF_xb_lot_AUC8	cross-batch	lot_mean	0.923	recomputed 32_pred_v3_RF	v0 had 0.853 which was pixel-OVERLAP
+GBM_xb_lot_AUC8	cross-batch	lot_mean	0.935	results/36 + 32_pred_v3_GBM	matches
+RidgeSNV_xb_lot_AUC8	cross-batch	lot_mean	0.971	results/36/37 + 37_pred_v3_RidgeSNV (seed=42)	specific-seed value
+GBMSNV_xb_lot_AUC8	cross-batch	lot_mean	0.289	results/36	collapse
+# v2 new: bootstrap CIs (script 41, B=2000 stratified)
+RidgeSG2_xb_lot_AUC8_CI	cross-batch	lot_mean	0.515-0.860	results/41_bootstrap_CIs.tsv	wide CI signals instability
+RF_xb_lot_AUC8_CI	cross-batch	lot_mean	0.842-0.984	results/41	solid
+GBM_xb_lot_AUC8_CI	cross-batch	lot_mean	0.858-0.987	results/41	solid
+RidgeSNV_xb_lot_AUC8_CI	cross-batch	lot_mean	0.920-1.000	results/41	headline pipeline
+RidgeSNV_xb_lot_FPR100_CI	cross-batch	lot_mean	0.000-0.176	results/41	FPR at 100% lot recall
+delta_AUC8_RidgeSNV_minus_RidgeSG2	cross-batch	lot_mean	0.273	results/41 paired bootstrap	95% CI 0.118-0.453, P(d>0)=1.000
+# v2 new: image-mean baseline (script 42)
+imgmean_SG2_in_AUC8	in-domain LOO	lot	0.796	results/42_image_mean_baseline.tsv	per-cube mean Ridge
+imgmean_SG2_xb_AUC8	cross-batch	lot	0.639	results/42	-0.059 vs full-pixel Ridge+SG2 (0.698)
+imgmean_SNV_in_AUC8	in-domain LOO	lot	0.859	results/42	+0.063 vs imgmean SG2
+imgmean_SNV_xb_AUC8	cross-batch	lot	0.779	results/42	-0.192 vs full-pixel Ridge+SNV (0.971); SNV lifts image-mean by +0.14
+fullpixel_minus_imgmean_xb_SG2	cross-batch	lot	0.059	derived	xb_full Ridge+SG2 (0.698) minus imgmean_SG2_xb (0.639)
+fullpixel_minus_imgmean_xb_SNV	cross-batch	lot	0.192	derived	SNV-extracted within-image transferable info
+# v2 new: sampling sensitivity (script 43)
+sampling_sweep_cells	-	-	9	results/43_sampling_sensitivity_agg.tsv	3 mask_q x 3 n_pix
+sampling_sweep_runs	-	-	45	-	5 seeds per cell
+sampling_sweep_AUC_min	-	cell_mean	0.947	results/43_agg	q=0.55 n_pix=100
+sampling_sweep_AUC_max	-	cell_mean	0.966	results/43_agg	q=0.45 n_pix=300
+sampling_sweep_baseline_cell_mean	-	cell_mean	0.962	results/43_agg q=0.55 n_pix=300	main-pipeline cell, seed-averaged
+sampling_sweep_seedstd_max	-	-	0.020	results/43_agg q=0.45 n_pix=100	smallest cell
+headline_specific_seed_42	cross-batch	lot	0.971	saved pred + script 37	what is reported in tables for thresholds/ROI
+verification_date	-	-	2026-06-03	this v2 session	all numbers re-confirmed
+GBMSNV_xb_lot_AUC8	cross-batch	lot_mean	0.289	results/41_bootstrap_CIs.tsv (script 45 appended)	95% CI [0.111, 0.477] B=2000
+GBMSNV_xb_lot_AUC10	cross-batch	lot_mean	0.203	results/41 (script 45)	95% CI [0.059, 0.379]
+GBMSNV_xb_lot_AUC15	cross-batch	lot_mean	0.248	results/41 (script 45)	95% CI [0.077, 0.442]
+GBMSNV_xb_lot_FPR100_8	cross-batch	lot_mean	0.971	results/41 (script 45)	95% CI [0.853, 1.000]
+v4_DIAPER_to_WILLIAMS	-	-	correction	references/papers/Diaper2025_HyperPistachio_Sensors25_1548.pdf	Hallucinated "Diaper" first author across v0-v3 from earlier-session note. Verified vs source PDF: actual = Williams L, Shukla P, Sheikh-Akbari A, Mahroughi S, Mporas I. 10 in-text + 1 reference list + 1 figure caption updated in v4.
+v4_IARC100F_pages	-	-	225-248	IARC publications website search	confirmed via search results; was already in v1 inference, now externally validated
