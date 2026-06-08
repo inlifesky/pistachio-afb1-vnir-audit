@@ -19,9 +19,12 @@ references where available, otherwise marked ASSUMPTION. The point is the
 framework, not the exact numbers.
 """
 import os
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 
 # ============================================================
 # Cost parameters (defaults are illustrative — change per scenario)

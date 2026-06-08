@@ -8,13 +8,16 @@ runs B=2000 stratified bootstrap over the 52 lots at 8/10/15 ppb. Appends
 to results/41_bootstrap_CIs.tsv and updates 41_bootstrap_CIs.md.
 """
 import os, sys, time
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import roc_auc_score, average_precision_score
 sys.path.insert(0, os.path.dirname(__file__))
 from preprocessing import _sg
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 B, SEED = 2000, 42
 
 def snv(X):

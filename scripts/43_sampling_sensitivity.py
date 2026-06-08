@@ -19,6 +19,9 @@ Report cross-batch lot AUC@8 mean and std across seeds for each
 the recommended pipeline is robust to sampling choices.
 """
 import os, sys, time, glob, warnings
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import StandardScaler
@@ -29,9 +32,9 @@ sys.path.insert(0, os.path.dirname(__file__))
 from preprocessing import _sg
 from pistachio_io import read_bil, AFB1_PPB, REFLECTANCE_SCALE
 
-V1_ROOT = r"D:\bioinformatics\project_pistachio_AFB1\data\pistachio\extracted\Dataset"
-V3_ROOT = r"D:\bioinformatics\project_pistachio_AFB1\data\pistachio_v3"
-RES     = r"D:\bioinformatics\project_pistachio_AFB1\results"
+V1_ROOT = _os.environ["PISTACHIO_V1_DATA"]  # unzipped Zenodo v1 cubes
+V3_ROOT = _os.environ["PISTACHIO_V3_DATA"]  # unzipped Zenodo v3 cubes
+RES     = _os.environ.get("PISTACHIO_RES", "results")
 
 V3_PPB = {
     "Level 01": 0.00, "Level 02": 0.40, "Level 03": 0.67, "Level 04": 0.88,

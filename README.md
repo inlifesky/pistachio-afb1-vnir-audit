@@ -66,11 +66,39 @@ pip install -r requirements.txt
 
 ### 2. Data
 
-Download the two Zenodo archives (links above) and extract them under `data/v1/` and `data/v3/` as shown in the [Data](#data) section.
+Download the two Zenodo archives (links above) and unzip them somewhere on disk. Each archive contains a `Dataset/` folder with one subfolder per contamination level holding the `.bil` cubes.
 
-### 3. Run
+### 3. Environment variables
 
-Each script writes a Markdown summary alongside its TSV outputs in `results/`. Scripts are independent and idempotent; re-running a single script does not require re-running upstream ones.
+The scripts read three paths from environment variables so the repo works without modification on any machine. Set them once before running the pipeline:
+
+| Variable | Required for | What it points at |
+|---|---|---|
+| `PISTACHIO_V1_DATA` | scripts 19, 26, 32, 38, 40, 43 (anything that reads v1 cubes) | the unzipped v1 `Dataset/` folder (Zenodo doi:10.5281/zenodo.16920712) |
+| `PISTACHIO_V3_DATA` | scripts 32, 38, 43 (anything that reads v3 cubes) | the unzipped v3 `Dataset/` folder (Zenodo doi:10.5281/zenodo.20027441) |
+| `PISTACHIO_RES` (optional) | all scripts | output directory for TSVs and figures. Defaults to `./results` when unset, so the cloned repo's `results/` folder is used. |
+| `PISTACHIO_FIG` (optional) | scripts 49 (figure generation) | figure output directory. Defaults to `$PISTACHIO_RES/figures`. |
+
+Example (bash / WSL):
+
+```bash
+export PISTACHIO_V1_DATA="/path/to/unzipped/zenodo_v1/Dataset"
+export PISTACHIO_V3_DATA="/path/to/unzipped/zenodo_v3/Dataset"
+# PISTACHIO_RES defaults to ./results
+```
+
+Example (PowerShell):
+
+```powershell
+$env:PISTACHIO_V1_DATA = "D:\path\to\unzipped\zenodo_v1\Dataset"
+$env:PISTACHIO_V3_DATA = "D:\path\to\unzipped\zenodo_v3\Dataset"
+```
+
+A script will raise `KeyError: 'PISTACHIO_V1_DATA'` (or `PISTACHIO_V3_DATA`) if the required variable is missing — set the variable and re-run.
+
+### 4. Run
+
+Each script writes a Markdown summary alongside its TSV outputs in `$PISTACHIO_RES` (default `./results`). Scripts are independent and idempotent; re-running a single script does not require re-running upstream ones.
 
 ```bash
 # Cube I/O + foreground masking + per-cube random pixel draw (deterministic, seed=42)

@@ -25,6 +25,9 @@ If residual R^2/AUC are preserved -> within-image kernel features carry the
 signal, image-level baseline is incidental.
 """
 import os, sys, time, warnings
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV
 from sklearn.ensemble import RandomForestRegressor
@@ -38,7 +41,7 @@ from preprocessing import _sg
 from pistachio_io import EU_AFB1_THRESHOLD_PPB
 warnings.filterwarnings("ignore")
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 LOW_CONC_THRESHOLD = 2.0
 
 X_raw = np.load(os.path.join(RES, "pistachio_spectra.npy"))

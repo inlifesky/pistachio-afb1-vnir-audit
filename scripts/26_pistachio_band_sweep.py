@@ -24,6 +24,9 @@ Outputs:
   results/26_band_sweep.png   - AUC vs k, R^2 vs k
 """
 import os, sys, time, warnings
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV, Ridge
 from sklearn.preprocessing import StandardScaler
@@ -36,7 +39,7 @@ from preprocessing import _sg
 from pistachio_io import EU_AFB1_THRESHOLD_PPB
 warnings.filterwarnings("ignore")
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 SEED = 42
 LOW_CONC_THRESHOLD = 2.0   # sub-detection-limit boundary
 
@@ -49,7 +52,7 @@ images = meta["image"].values
 print(f"[load] {X_raw.shape[0]} pixels x {X_raw.shape[1]} bands", flush=True)
 
 # wavelength axis
-DATA_ROOT = r"D:\bioinformatics\project_pistachio_AFB1\data\pistachio\extracted\Dataset"
+DATA_ROOT = _os.environ["PISTACHIO_V1_DATA"]  # unzipped Zenodo v1 cubes
 hdr_path = os.path.join(DATA_ROOT, "Level 01", "L01_0001.hdr")
 text = open(hdr_path, "r", encoding="utf-8").read()
 s = text.find("wavelength = {") + len("wavelength = {")

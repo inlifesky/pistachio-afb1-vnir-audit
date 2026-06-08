@@ -27,13 +27,16 @@ picks them up without changing any image path):
   figures/supplementary/S3_healthy_bias.{png,pdf}
 """
 import os, sys
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
-RES  = r"D:\bioinformatics\project_pistachio_AFB1\results"
-FIG  = r"D:\bioinformatics\project_pistachio_AFB1\results\figures"
+RES  = _os.environ.get("PISTACHIO_RES", "results")
+FIG  = _os.environ.get("PISTACHIO_FIG", _os.path.join(RES, "figures"))
 SUP  = os.path.join(FIG, "supplementary")
 os.makedirs(SUP, exist_ok=True)
 

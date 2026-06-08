@@ -14,6 +14,9 @@ Two visual diagnostics for paper-2 Discussion:
       confirms regression-to-mean is amplified by SNV normalisation.
 """
 import os, sys, warnings
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import StandardScaler
@@ -25,7 +28,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from preprocessing import _sg, _snv
 warnings.filterwarnings("ignore")
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 
 X1_raw = np.load(os.path.join(RES, "pistachio_spectra.npy"))
 meta1 = pd.read_csv(os.path.join(RES, "pistachio_meta.tsv"), sep="\t")
@@ -41,7 +44,7 @@ X1_snv = _snv(X1_sg2)
 X3_sg2 = _sg(X3_raw.astype(float), 2)
 X3_snv = _snv(X3_sg2)
 
-DATA_ROOT = r"D:\bioinformatics\project_pistachio_AFB1\data\pistachio\extracted\Dataset"
+DATA_ROOT = _os.environ["PISTACHIO_V1_DATA"]  # unzipped Zenodo v1 cubes
 text = open(os.path.join(DATA_ROOT, "Level 01", "L01_0001.hdr"), "r",
             encoding="utf-8").read()
 s = text.find("wavelength = {") + len("wavelength = {")

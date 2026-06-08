@@ -15,6 +15,9 @@ Pipeline:
   8. LOIO evaluation (cross-image generalization = pistachio analog of cross-year)
 """
 import os, sys, glob, warnings
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -30,8 +33,8 @@ from pistachio_io import (read_bil, AFB1_PPB, EU_AFB1_THRESHOLD_PPB,
                           REFLECTANCE_SCALE, ROWS, COLS, BANDS)
 warnings.filterwarnings("ignore")
 
-DATA_ROOT = r"D:\bioinformatics\project_pistachio_AFB1\data\pistachio\extracted\Dataset"
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+DATA_ROOT = _os.environ["PISTACHIO_V1_DATA"]  # unzipped Zenodo v1 cubes
+RES = _os.environ.get("PISTACHIO_RES", "results")
 SEED = 42
 RNG = np.random.default_rng(SEED)
 

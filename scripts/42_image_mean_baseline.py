@@ -34,6 +34,9 @@ Outputs
 - results/42_image_mean_baseline.md      narrative table
 """
 import os, sys
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import StandardScaler
@@ -43,7 +46,7 @@ from sklearn.metrics import roc_auc_score, average_precision_score
 sys.path.insert(0, os.path.dirname(__file__))
 from preprocessing import _sg
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 SEED = 42
 
 # ---- load ----

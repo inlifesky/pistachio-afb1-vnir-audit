@@ -25,10 +25,13 @@ Outputs
 - logs/41_*.log                     stdout
 """
 import os, sys, time
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.metrics import roc_auc_score, average_precision_score
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 B   = 2000
 SEED = 42
 THRESHOLDS = [8, 10, 15]

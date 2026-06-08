@@ -18,6 +18,9 @@ v3 specifics (from Zenodo metadata):
   - .hdr / .bil same ENVI BIL uint16 format
 """
 import os, sys, glob, time, warnings
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV
 from sklearn.ensemble import RandomForestRegressor, HistGradientBoostingRegressor
@@ -30,8 +33,8 @@ from preprocessing import _sg
 from pistachio_io import read_bil, REFLECTANCE_SCALE, EU_AFB1_THRESHOLD_PPB
 warnings.filterwarnings("ignore")
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
-V3_ROOT = r"D:\bioinformatics\project_pistachio_AFB1\data\pistachio_v3\Dataset"
+RES = _os.environ.get("PISTACHIO_RES", "results")
+V3_ROOT = _os.environ["PISTACHIO_V3_DATA"]  # unzipped Zenodo v3 cubes
 PIX_PER_IMAGE = 300
 MASK_BAND_NM = 650
 MASK_QUANTILE = 0.55

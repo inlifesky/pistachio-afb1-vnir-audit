@@ -13,6 +13,9 @@ Inputs (already saved on disk):
   - v1 Ridge in-domain: re-run here (3 sec, no .npy saved earlier)
 """
 import os, sys, warnings
+import os as _os
+# Env-driven paths; defaults work when scripts are run from the repo root.
+# Override via PISTACHIO_RES / PISTACHIO_V1_DATA / PISTACHIO_V3_DATA env vars.
 import numpy as np, pandas as pd
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import StandardScaler
@@ -23,7 +26,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from preprocessing import _sg
 warnings.filterwarnings("ignore")
 
-RES = r"D:\bioinformatics\project_pistachio_AFB1\results"
+RES = _os.environ.get("PISTACHIO_RES", "results")
 THRESHOLDS = [8, 10, 12, 15]
 TARGET_RECALL = 0.95
 
