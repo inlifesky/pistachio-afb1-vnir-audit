@@ -2,7 +2,7 @@
 
 Reproducibility repository for the manuscript:
 
-> Yuan, W. (2026). *Cross-batch validation of VNIR hyperspectral pre-screening for pistachio aflatoxin B1: preprocessing-driven transfer, multispectral limits, and per-cube decision metrics.* Submitted to *Food Control*. ORCID: 0009-0009-4139-7802.
+> Yuan, W. (2026). *Cross-batch validation of VNIR hyperspectral pre-screening for pistachio aflatoxin B1: preprocessing-driven transfer, multispectral limits, and per-cube analytical metrics.* Submitted to *Food Analytical Methods*. ORCID: 0009-0009-4139-7802.
 
 This repository contains the analysis pipeline that reproduces every number, table, and figure in the manuscript and its supplement. The underlying hyperspectral data are openly deposited at Zenodo under a no-derivatives licence and are **not** redistributed here; see [Data](#data) below for download instructions.
 
@@ -14,9 +14,9 @@ VNIR (~400–1000 nm) hyperspectral imaging combined with machine learning is wi
 
 The audit reports three layers of evidence, each with 95 % bootstrap confidence intervals over the 52 cross-batch cubes:
 
-1. **Preprocessing-driven cross-batch transfer.** Ridge + SG2 achieves in-domain per-cube AUC 0.984 at the 8 µg/kg EU threshold but collapses cross-batch to 0.698 (95 % CI 0.515–0.860); an image-mean baseline reaches a comparable 0.639, showing that under SG2 ridge transfers little beyond per-image baseline information which itself drifts batch-to-batch. Adding SNV lifts the same ridge to a cross-batch per-cube AUC of **0.971 (95 % CI 0.920–1.000)**, a paired Δ-AUC = 0.273 (95 % CI 0.118–0.453, *P*(Δ > 0) = 1.000). Gradient boosting *collapses* under SNV (per-cube AUC 0.289, 95 % CI 0.111–0.477); the partial-dependence direction flips on 5 of 10 top-|β| bands.
-2. **Honest negative on sparse multispectral substitution.** Five-to-ten band VNIR multispectral substitution is **not supported** at the regulatory threshold on this dataset under any of three selection strategies (supervised in-fold |β|, unsupervised orthogonal-subspace, uniform). AUC@8 ≥ 0.50 requires *k* ≥ 100 bands; AUC@8 ≥ 0.80 requires the full 462.
-3. **Per-cube decision metrics and cost analysis.** Pixel outputs are aggregated to per-cube decisions (FPR 0.088 at 100 % per-cube recall, 95 % CI 0.000–0.176); a three-tier risk matrix under explicit NPV ≥ 0.95 / PPV ≥ 0.90 rules; and a scenario-analysis cost model that is favourable across most plausible HPLC and recall-liability cost cells but **not all**.
+1. **Preprocessing-driven cross-batch transfer.** Ridge + SG2 achieves in-domain per-cube AUC 0.984 at the 8 µg/kg EU threshold but falls cross-batch to 0.698 (95 % CI 0.515–0.860); an image-mean baseline reaches a comparable 0.639, showing that under SG2 ridge transfers little beyond per-image baseline information which itself drifts batch-to-batch. Adding SNV lifts the same ridge to a cross-batch per-cube AUC of **0.971 (95 % CI 0.920–1.000)**, a paired Δ-AUC = 0.273 (95 % CI 0.118–0.453, *P*(Δ > 0) = 1.000). Gradient boosting *fails to transfer* under SNV (per-cube AUC 0.289, 95 % CI 0.111–0.477); the partial-dependence direction flips on 5 of 10 top-|β| bands.
+2. **Boundary finding on sparse multispectral substitution.** Five-to-ten band VNIR multispectral substitution is **not supported** at the regulatory threshold on this dataset under any of three selection strategies (supervised in-fold |β|, unsupervised orthogonal-subspace, uniform). AUC@8 ≥ 0.50 requires *k* ≥ 100 bands; AUC@8 ≥ 0.80 requires the full 462.
+3. **Per-cube analytical metrics and cost analysis.** Pixel outputs are aggregated to per-cube decisions (FPR 0.088 at 100 % per-cube recall, 95 % CI 0.000–0.176); a three-tier risk matrix under explicit NPV ≥ 0.95 / PPV ≥ 0.90 rules; and a scenario-analysis cost model that is favourable across most plausible HPLC and recall-liability cost cells but **not all**.
 
 The methodological contribution is an **image-mean transfer-risk diagnostic** — a residual-regression test paired with a direct image-mean baseline — that flags cross-batch failure before any new-batch test is run. The diagnostic is reusable for any label-uniform-within-image food-safety acquisition.
 
@@ -187,7 +187,7 @@ If any of these are off by more than the bootstrap variance reported in the manu
 
 If you use this code, please cite the manuscript (once published) and the source dataset:
 
-- Yuan, W. (2026). Cross-batch validation of VNIR hyperspectral pre-screening for pistachio aflatoxin B1: preprocessing-driven transfer, multispectral limits, and per-cube decision metrics. *Submitted to Food Control.* ORCID: 0009-0009-4139-7802.
+- Yuan, W. (2026). Cross-batch validation of VNIR hyperspectral pre-screening for pistachio aflatoxin B1: preprocessing-driven transfer, multispectral limits, and per-cube analytical metrics. *Submitted to Food Analytical Methods.* ORCID: 0009-0009-4139-7802.
 - Sheikh-Akbari, A., & Mehrabinejad, H. (2025). *HyperPistachio: A Hyperspectral Image Dataset of Aflatoxin B1 Contaminated Pistachio Nuts* (Version 1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.16920712
 - Sheikh-Akbari, A., & Mehrabinejad, H. (2026). *HyperPistachio: A Hyperspectral Image Dataset of Aflatoxin B1 Contaminated Pistachio Nuts* (Version 3) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20027441
 - Williams, L., Shukla, P., Sheikh-Akbari, A., Mahroughi, S., & Mporas, I. (2025). Measuring the level of aflatoxin infection in pistachio nuts by applying machine learning techniques to hyperspectral images. *Sensors* 25(5), 1548. https://doi.org/10.3390/s25051548
