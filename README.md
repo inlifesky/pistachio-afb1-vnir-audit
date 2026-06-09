@@ -1,8 +1,6 @@
 # Cross-batch validation of VNIR hyperspectral pre-screening for pistachio aflatoxin B1
 
-Reproducibility repository for the manuscript:
-
-> Yuan, W. (2026). *Cross-batch validation of VNIR hyperspectral pre-screening for pistachio aflatoxin B1: preprocessing-driven transfer, multispectral limits, and per-cube analytical metrics.* Submitted to *Food Analytical Methods*. ORCID: 0009-0009-4139-7802.
+Reproducibility repository for a manuscript under review.
 
 This repository contains the analysis pipeline that reproduces every number, table, and figure in the manuscript and its supplement. The underlying hyperspectral data are openly deposited at Zenodo under a no-derivatives licence and are **not** redistributed here; see [Data](#data) below for download instructions.
 
@@ -215,12 +213,12 @@ If any of these are off by more than the bootstrap variance reported in the manu
 
 ## Citation
 
-If you use this code, please cite the manuscript (once published) and the source dataset:
+If you use this code, please cite the source dataset:
 
-- Yuan, W. (2026). Cross-batch validation of VNIR hyperspectral pre-screening for pistachio aflatoxin B1: preprocessing-driven transfer, multispectral limits, and per-cube analytical metrics. *Submitted to Food Analytical Methods.* ORCID: 0009-0009-4139-7802.
 - Sheikh-Akbari, A., & Mehrabinejad, H. (2025). *HyperPistachio: A Hyperspectral Image Dataset of Aflatoxin B1 Contaminated Pistachio Nuts* (Version 1.0) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.16920712
 - Sheikh-Akbari, A., & Mehrabinejad, H. (2026). *HyperPistachio: A Hyperspectral Image Dataset of Aflatoxin B1 Contaminated Pistachio Nuts* (Version 3) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.20027441
-- Williams, L., Shukla, P., Sheikh-Akbari, A., Mahroughi, S., & Mporas, I. (2025). Measuring the level of aflatoxin infection in pistachio nuts by applying machine learning techniques to hyperspectral images. *Sensors* 25(5), 1548. https://doi.org/10.3390/s25051548
+
+A full citation for this work will be added on acceptance.
 
 ---
 
