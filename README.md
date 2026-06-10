@@ -230,4 +230,4 @@ Code is released under the [MIT License](LICENSE). The underlying HyperPistachio
 
 ## Contact
 
-Wei Yuan — rita.w.yuan@gmail.com — ORCID: [0009-0009-4139-7802](https://orcid.org/0009-0009-4139-7802)
+Wei Yuan — rita.w.yuan@gmail.com
